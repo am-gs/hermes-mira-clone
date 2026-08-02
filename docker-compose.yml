@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - redis
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - hermes-network
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - hermes-network
+
+volumes:
+  redis-data:
+
+networks:
+  hermes-network:
+    driver: bridge
