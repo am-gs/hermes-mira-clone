@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Thinking Block Styles */
+.thinking-block {
+  @apply bg-gray-100 dark:bg-gray-800 rounded-lg p-4 mb-4 border border-gray-200 dark:border-gray-700;
+}
+
+.thinking-header {
+  @apply flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400;
+}
+
+.thinking-shimmer {
+  background: linear-gradient(
+    90deg,
+    #9ca3af 0%,
+    #6b7280 50%,
+    #9ca3af 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.thinking-steps {
+  @apply mt-3 space-y-2;
+}
+
+.thinking-step {
+  @apply flex items-start gap-2 text-sm;
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.thinking-step-icon {
+  @apply flex-shrink-0 w-4 h-4 mt-0.5;
+}
+
+.thinking-step-active {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.thinking-step-done {
+  @apply text-green-600 dark:text-green-400;
+}
+
+.thinking-step-label {
+  @apply font-medium text-gray-900 dark:text-gray-100;
+}
+
+.thinking-step-text {
+  @apply text-gray-600 dark:text-gray-400 text-xs mt-1;
+}
+
+/* Message Styles */
+.message {
+  @apply mb-4 p-4 rounded-lg;
+}
+
+.message-user {
+  @apply bg-blue-500 text-white ml-8;
+}
+
+.message-assistant {
+  @apply bg-gray-100 dark:bg-gray-800 mr-8;
+}
+
+.message-content {
+  @apply whitespace-pre-wrap;
+}
+
+/* Streaming indicator */
+.streaming-indicator {
+  @apply inline-block w-2 h-4 bg-gray-400 dark:bg-gray-600 animate-pulse;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .thinking-shimmer,
+  .thinking-step {
+    animation: none;
+  }
+}

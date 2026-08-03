@@ -1,0 +1,19 @@
+[Unit]
+Description=Hermes Mira Clone Bot
+After=network.target redis.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/hermes-mira-clone
+ExecStart=/usr/bin/pnpm start
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/ubuntu/hermes-mira-clone/logs/bot.log
+StandardError=append:/home/ubuntu/hermes-mira-clone/logs/bot-error.log
+
+Environment=NODE_ENV=production
+EnvironmentFile=/home/ubuntu/hermes-mira-clone/.env
+
+[Install]
+WantedBy=multi-user.target
